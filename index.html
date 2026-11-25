@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f3ee">
+  <title>アーカイブサイト</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f3ee;
+      --ink: #242521;
+      --muted: #77786f;
+      --line: #d9d7cf;
+      --gutter: clamp(18px, 4vw, 56px);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      padding: 30px var(--gutter) 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 500;
+      letter-spacing: .08em;
+    }
+
+    main { padding: 30px var(--gutter) 64px; }
+
+    .collection {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(24px, 4vw, 56px) clamp(16px, 2.4vw, 34px);
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+    figure { min-width: 0; margin: 0; }
+
+    .photo-button {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: #e5e2da;
+      cursor: zoom-in;
+      overflow: hidden;
+    }
+
+    .photo-button img {
+      display: block;
+      width: 100%;
+      height: clamp(280px, 51vw, 700px);
+      object-fit: cover;
+      transition: transform 450ms cubic-bezier(.2,.7,.2,1);
+    }
+
+    .photo-button:hover img { transform: scale(1.018); }
+    .photo-button:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+
+    figcaption {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 14px;
+      padding-top: 12px;
+    }
+
+    .name { margin: 0; font-size: 14px; font-weight: 500; letter-spacing: .06em; }
+    .words { margin: 0; color: var(--muted); font-family: "Yu Mincho", serif; font-size: 13px; }
+
+    dialog {
+      width: min(96vw, 1500px);
+      max-width: none;
+      height: min(94vh, 1100px);
+      max-height: none;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      overflow: visible;
+    }
+
+    dialog::backdrop { background: rgb(18 19 17 / 88%); }
+
+    .lightbox-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .close-lightbox {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 1px solid rgb(255 255 255 / 55%);
+      border-radius: 50%;
+      background: rgb(0 0 0 / 38%);
+      color: white;
+      font: inherit;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 640px) {
+      header { padding-top: 22px; padding-bottom: 18px; }
+      main { padding-top: 18px; padding-bottom: 42px; }
+      .collection { grid-template-columns: 1fr; gap: 28px; }
+      .photo-button img { height: min(118vw, 620px); }
+      figcaption { padding-top: 9px; }
+      dialog { width: 100vw; height: 100dvh; }
+      .close-lightbox { top: max(12px, env(safe-area-inset-top)); right: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>アーカイブサイト</h1>
+  </header>
+
+  <main>
+    <section class="collection" aria-label="写真の一覧">
+      <figure>
+        <button class="photo-button" type="button" aria-label="01 の写真を拡大">
+          <img src="images/01.jpg" alt="夜の塔" loading="eager">
+        </button>
+        <figcaption><h2 class="name">01</h2><p class="words">（ここに言葉）</p></figcaption>
+      </figure>
+      <figure>
+        <button class="photo-button" type="button" aria-label="02 の写真を拡大">
+          <img src="images/02.jpg" alt="木の上のナマケモノ" loading="lazy">
+        </button>
+        <figcaption><h2 class="name">02</h2><p class="words">（ここに言葉）</p></figcaption>
+      </figure>
+      <figure>
+        <button class="photo-button" type="button" aria-label="03 の写真を拡大">
+          <img src="images/03.jpg" alt="雪景色の中の動物" loading="lazy">
+        </button>
+        <figcaption><h2 class="name">03</h2><p class="words">（ここに言葉）</p></figcaption>
+      </figure>
+      <figure>
+        <button class="photo-button" type="button" aria-label="04 の写真を拡大">
+          <img src="images/04.jpg" alt="雪だるま" loading="lazy">
+        </button>
+        <figcaption><h2 class="name">04</h2><p class="words">（ここに言葉）</p></figcaption>
+      </figure>
+      <figure>
+        <button class="photo-button" type="button" aria-label="05 の写真を拡大">
+          <img src="images/05.jpg" alt="夜空に上がる花火" loading="lazy">
+        </button>
+        <figcaption><h2 class="name">05</h2><p class="words">（ここに言葉）</p></figcaption>
+      </figure>
+    </section>
+  </main>
+
+  <dialog class="lightbox" aria-label="写真の拡大表示">
+    <button class="close-lightbox" type="button" aria-label="閉じる">×</button>
+    <img class="lightbox-image" alt="">
+  </dialog>
+
+  <script>
+    const lightbox = document.querySelector('.lightbox');
+    const enlargedImage = document.querySelector('.lightbox-image');
+
+    document.querySelectorAll('.photo-button').forEach((button) => {
+      button.addEventListener('click', () => {
+        const image = button.querySelector('img');
+        enlargedImage.src = image.src;
+        enlargedImage.alt = image.alt;
+        lightbox.showModal();
+      });
+    });
+
+    document.querySelector('.close-lightbox').addEventListener('click', () => lightbox.close());
+    lightbox.addEventListener('click', (event) => {
+      if (event.target === lightbox) lightbox.close();
+    });
+  </script>
+</body>
+</html>
